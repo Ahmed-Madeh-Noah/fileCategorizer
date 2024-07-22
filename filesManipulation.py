@@ -4,7 +4,7 @@ from glob import iglob
 from config import *
 
 
-def prepare_dst_dir():
+def prep_dst_dir():
     if os.path.isdir(DESTINATION_DIR):
         dir_not_empty = len(tuple(iglob(DESTINATION_DIR + '\\**', include_hidden=True)))
         if dir_not_empty:
@@ -28,6 +28,13 @@ def extract_file_extension(file_path):
     file_path = file_path[::-1]
     dot_index = file_path.find('.')
     return file_path[:dot_index][::-1] if dot_index != -1 else 'Unknown'
+
+
+def prep_type_dir(file_type):
+    type_path = DESTINATION_DIR + '\\' + file_type
+    if not os.path.isdir(type_path):
+        os.mkdir(type_path)
+    return type_path
 
 
 if __name__ == '__main__':
