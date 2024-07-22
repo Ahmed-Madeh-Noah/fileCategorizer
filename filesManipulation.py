@@ -15,5 +15,11 @@ def get_files_iter():
             yield file_path
 
 
+def extract_file_extension(file_path):
+    file_path = file_path[::-1]
+    dot_index = file_path.find('.')
+    return file_path[:dot_index][::-1] if dot_index != -1 else 'Unknown'
+
+
 if __name__ == '__main__':
     pass
