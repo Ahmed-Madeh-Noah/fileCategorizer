@@ -1,7 +1,16 @@
+import os
 from glob import iglob
-from os.path import isfile
 
 from config import *
+
+
+def prepare_dst_dir():
+    if os.path.isdir(DESTINATION_DIR):
+        dir_not_empty = len(tuple(iglob(DESTINATION_DIR + '\\**', include_hidden=True)))
+        if dir_not_empty:
+            raise IsADirectoryError('The destination directory exists and is not empty')
+        os.rmdir(DESTINATION_DIR)
+    os.mkdir(DESTINATION_DIR)
 
 
 def get_files_iter():
@@ -11,7 +20,7 @@ def get_files_iter():
         for ignored_path in IGNORED_DIRS:
             if ignored_path in file_path:
                 should_ignore = True
-        if not should_ignore and isfile(file_path):
+        if not should_ignore and os.path.isfile(file_path):
             yield file_path
 
 
