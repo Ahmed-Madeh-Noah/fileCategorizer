@@ -70,8 +70,10 @@ def paste_file(file_path, new_dist):
         tmp_file.write(org_file.read())
         tmp_file.close()
         org_file.close()
+        log_file.write(':COPIED:' + file_path + ':' + new_dist + ':\n')
     else:
         os.rename(file_path, new_dist)
+        log_file.write(':MOVED:' + file_path + ':' + new_dist + ':\n')
 
 
 def progress_bar(completed):

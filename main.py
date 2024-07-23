@@ -32,4 +32,5 @@ if __name__ == '__main__':
             print(error)
             exit(-1)
     print('Process Completed Successfully')
+    cF.log_file.write(str(cF.time_ns()) + '  ||  ' + cF.ctime() + '::::::::::' + '\n')
     cF.log_file.close()
