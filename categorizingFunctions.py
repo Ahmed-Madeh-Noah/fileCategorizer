@@ -30,7 +30,7 @@ def enough_storage(files):
     needed_storage = 0
     for file in files:
         needed_storage += os.path.getsize(file)
-    if disk_usage(DESTINATION_DIR)[2] - needed_storage < STORAGE_MARGIN:
+    if disk_usage(DESTINATION_DIR)[2] - needed_storage < STORAGE_MARGIN and COPY_FILES:
         raise MemoryError('Not enough disk space to copy the files')
     return needed_storage
 

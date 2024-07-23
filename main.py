@@ -9,10 +9,9 @@ if __name__ == '__main__':
     print('Collecting files\' paths')
     filesPath = cF.get_files_iter()
     print('Files\' paths collected')
-    if cF.COPY_FILES:
-        print('Checking if there is enough storage')
-        totalStorage = cF.enough_storage(filesPath)
-        print('Enough storage is present')
+    print('Checking if there is enough storage')
+    totalStorage = cF.enough_storage(filesPath)
+    print('Enough storage is present')
     doneStorage = 0
     lastPrint = time_ns()
     print('Process started')
