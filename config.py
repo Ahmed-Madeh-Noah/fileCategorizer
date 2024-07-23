@@ -6,6 +6,7 @@ IGNORED_DIRS = ('D:\\$RECYCLE.BIN',)
 STORAGE_MARGIN = 10 * 1024 ** 3
 RENAME_FILES = False
 COPY_FILES = True
+UPDATING_DURATION = 3 * 10 ** 9
 
 if __name__ == '__main__':
     pass

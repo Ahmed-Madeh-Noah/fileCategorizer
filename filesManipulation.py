@@ -30,6 +30,7 @@ def enough_storage(files):
         needed_storage += os.path.getsize(file)
     if disk_usage(DESTINATION_DIR)[2] - needed_storage < STORAGE_MARGIN:
         raise MemoryError('Not enough disk space to copy the files')
+    return needed_storage
 
 
 def extract_file_attr(file_path):
@@ -70,6 +71,14 @@ def paste_file(file_path, new_dist):
         org_file.close()
     else:
         os.rename(file_path, new_dist)
+
+
+def progress_bar(completed):
+    completed = round(completed)
+    text = ''
+    for i in range(100):
+        text += '#' if i < completed else '_'
+    print(text)
 
 
 if __name__ == '__main__':
