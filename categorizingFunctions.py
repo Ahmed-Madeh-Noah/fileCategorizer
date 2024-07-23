@@ -1,8 +1,12 @@
 import os
 from glob import glob, iglob
 from shutil import disk_usage
+from time import time_ns, ctime
 
 from config import *
+
+log_file = open('log_file.txt', 'w')
+log_file.write('::::::::::' + str(time_ns()) + '  ||  ' + ctime() + '\n')
 
 
 def prep_dst_dir():
@@ -37,8 +41,9 @@ def enough_storage(files):
 
 def extract_file_attr(file_path):
     file_path = file_path[::-1]
-    dot_index = file_path.find('.')
-    file_name = file_path[dot_index + 1:file_path.find('\\')][::-1]
+    slash_index = file_path.index('\\')
+    dot_index = file_path[:slash_index].find('.')
+    file_name = file_path[dot_index + 1:slash_index][::-1]
     file_type = file_path[:dot_index][::-1] if dot_index != -1 else 'Unknown'
     return file_name, file_type
 
@@ -53,7 +58,7 @@ def prep_type_dir(file_type):
 def generate_path_name(file_path, type_path, file_name, file_type, index):
     if RENAME_FILES:
         file_name = id(file_path)
-    new_file_path = type_path + '\\' + str(file_name) + str(index)
+    new_file_path = type_path + '\\' + str(file_name) + ' - ' + str(index)
     new_file_path += '.' + file_type if file_type != 'Unknown' else ''
     return new_file_path
 
