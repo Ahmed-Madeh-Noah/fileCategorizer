@@ -1,6 +1,6 @@
 import os
-from glob import iglob
-from random import random
+from glob import glob, iglob
+from shutil import disk_usage
 
 from config import *
 
@@ -14,7 +14,7 @@ def prep_dst_dir():
 
 
 def get_files_iter():
-    files_iter = iglob(MAIN_DIR, recursive=INC_CHILD_DIRS, include_hidden=INC_HIDDEN_DIRS)
+    files_iter = glob(MAIN_DIR, recursive=INC_CHILD_DIRS, include_hidden=INC_HIDDEN_DIRS)
     for file_path in files_iter:
         should_ignore = False
         for ignored_path in IGNORED_DIRS:
@@ -22,6 +22,14 @@ def get_files_iter():
                 should_ignore = True
         if not should_ignore and os.path.isfile(file_path):
             yield file_path
+
+
+def enough_storage(files):
+    needed_storage = 0
+    for file in files:
+        needed_storage += os.path.getsize(file)
+    if disk_usage(DESTINATION_DIR)[2] - needed_storage < STORAGE_MARGIN:
+        raise MemoryError('Not enough disk space to copy the files')
 
 
 def extract_file_attr(file_path):
@@ -39,7 +47,7 @@ def prep_type_dir(file_type):
     return type_path
 
 
-def generate_path_name(file_path, type_path, file_name, file_type):
+def generate_path_name(file_path, type_path, file_name, file_type, index):
     if RENAME_FILES:
         file_name = id(file_path)
     first_iter = True
@@ -47,7 +55,7 @@ def generate_path_name(file_path, type_path, file_name, file_type):
     while first_iter or os.path.isfile(new_file_path):
         new_file_path += type_path + '\\' + str(file_name)
         if not first_iter:
-            new_file_path += str(random()).replace('.', '-')
+            new_file_path += str(index).replace('.', '-')
         new_file_path += '.' + file_type if file_type != 'Unknown' else ''
         first_iter = False
     return new_file_path
