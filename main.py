@@ -1,3 +1,5 @@
+from time import time_ns
+
 import filesManipulation as fM
 
 if __name__ == '__main__':
@@ -5,14 +7,14 @@ if __name__ == '__main__':
     filesPath = fM.get_files_iter()
     totalStorage = fM.enough_storage(filesPath)
     doneStorage = 0
-    lastPrint = fM.time_ns()
+    lastPrint = time_ns()
     for index, filePath in enumerate(filesPath):
         fileName, fileType = fM.extract_file_attr(filePath)
         typePath = fM.prep_type_dir(fileType)
         newDist = fM.generate_path_name(filePath, typePath, fileName, fileType, index)
         fM.paste_file(filePath, newDist)
         doneStorage += fM.os.path.getsize(filePath)
-        currentTime = fM.time_ns()
+        currentTime = time_ns()
         if currentTime - lastPrint >= fM.UPDATING_DURATION:
             lastPrint = currentTime
             completed = round(doneStorage * 100 / totalStorage, 1)
