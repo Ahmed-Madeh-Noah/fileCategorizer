@@ -53,14 +53,8 @@ def prep_type_dir(file_type):
 def generate_path_name(file_path, type_path, file_name, file_type, index):
     if RENAME_FILES:
         file_name = id(file_path)
-    first_iter = True
-    new_file_path = ''
-    while first_iter or os.path.isfile(new_file_path):
-        new_file_path += type_path + '\\' + str(file_name)
-        if not first_iter:
-            new_file_path += str(index).replace('.', '-')
-        new_file_path += '.' + file_type if file_type != 'Unknown' else ''
-        first_iter = False
+    new_file_path = type_path + '\\' + str(file_name) + str(index)
+    new_file_path += '.' + file_type if file_type != 'Unknown' else ''
     return new_file_path
 
 
