@@ -53,5 +53,16 @@ def generate_path_name(file_path, type_path, file_name, file_type):
     return new_file_path
 
 
+def paste_file(file_path, new_dist):
+    if COPY_FILES:
+        org_file = open(file_path, 'rb')
+        tmp_file = open(new_dist, 'wb')
+        tmp_file.write(org_file.read())
+        tmp_file.close()
+        org_file.close()
+    else:
+        os.rename(file_path, new_dist)
+
+
 if __name__ == '__main__':
     pass
