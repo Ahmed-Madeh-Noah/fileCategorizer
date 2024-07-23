@@ -15,13 +15,15 @@ def prep_dst_dir():
 
 def get_files_iter():
     files_iter = glob(MAIN_DIR, recursive=INC_CHILD_DIRS, include_hidden=INC_HIDDEN_DIRS)
+    files = []
     for file_path in files_iter:
         should_ignore = False
         for ignored_path in IGNORED_DIRS:
             if ignored_path in file_path:
                 should_ignore = True
         if not should_ignore and os.path.isfile(file_path):
-            yield file_path
+            files.append(file_path)
+    return files
 
 
 def enough_storage(files):
