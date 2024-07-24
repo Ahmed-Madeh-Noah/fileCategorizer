@@ -18,6 +18,7 @@ if __name__ == '__main__':
     startTime = cF.time_ns()
     lastPrint = startTime
     print('Process started\n')
+    cF.logging(1)
     for index, filePath in enumerate(filesPath):
         try:
             fileName, fileType = cF.extract_file_attr(filePath)
@@ -36,6 +37,5 @@ if __name__ == '__main__':
             print(filePath)
             cF.log_file.close()
             raise
+    cF.logging()
     print('\nProcess Completed Successfully')
-    cF.log_file.write(cF.ctime() + '|' + str(cF.time_ns()) + ' >>>>>' + '\n')
-    cF.log_file.close()

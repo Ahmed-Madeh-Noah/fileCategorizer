@@ -5,9 +5,6 @@ from time import time_ns, ctime
 
 from config import *
 
-log_file = open('log_file.txt', 'w', encoding='utf-8')
-log_file.write('<<<<< ' + ctime() + '|' + str(time_ns()) + '|COPY_FILES = ?' + str(COPY_FILES) + '?\n')
-
 
 def prep_dst_dir():
     if os.path.isdir(DESTINATION_DIR):
@@ -70,18 +67,31 @@ def paste_file(file_path, new_dist):
         tmp_file.write(org_file.read())
         tmp_file.close()
         org_file.close()
-        log_file.write(new_dist + '\n')
+        logging(2, new_dist)
     else:
         os.rename(file_path, new_dist)
-        log_file.write(new_dist + '|' + file_path + '\n')
+        line = new_dist + '|' + file_path
+        logging(2, line)
 
 
 def progress_bar(completed):
-    completed = round(completed)
+    completed = round(completed / 2)
     text = ''
-    for i in range(100):
+    for i in range(50):
         text += '#' if i < completed else '_'
     print(text)
+
+
+def logging(mode=0, line=''):
+    log_file = open('log_file.txt', 'a', encoding='utf-8')
+    if mode == 1:
+        log_file.write('<<<<< ' + ctime() + '|' + str(time_ns()) + '|COPY_FILES = ?' + str(COPY_FILES) + '?\n')
+        log_file.close()
+    elif mode == 2:
+        log_file.write(line + '\n')
+    else:
+        log_file.write(ctime() + '|' + str(time_ns()) + ' >>>>>' + '\n')
+    log_file.close()
 
 
 if __name__ == '__main__':

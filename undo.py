@@ -6,7 +6,7 @@ UPDATING_DURATION = 1 * 10 ** 9
 
 if __name__ == '__main__':
     try:
-        log_file = open('log_file.txt')
+        log_file = open('log_file.txt', 'r', encoding='utf-8')
         lines = log_file.readlines()
         copy_mode = lines[0].split('?')[1] == 'True'
         lastFileIndex = len(lines) - 3
@@ -32,5 +32,6 @@ if __name__ == '__main__':
                 print(completed, '% of the process is completed,', round((currentTime - startTime) / 10 ** 9, 1),
                       'seconds has passed')
                 progress_bar(completed)
+        log_file.close()
     except FileNotFoundError:
         print('log_file.txt not found, can\'t undo anything')
