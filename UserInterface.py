@@ -1,2 +1,5 @@
+import customtkinter as ctk
+
 if __name__ == '__main__':
-    pass
+    root = ctk.CTk()
+    root.mainloop()
