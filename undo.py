@@ -1,4 +1,4 @@
-from os import rmdir, makedirs, rename
+from os import remove, makedirs, rename
 
 from categorizingFunctions import time_ns, progress_bar
 
@@ -15,7 +15,7 @@ if __name__ == '__main__':
         print('The undoing process has started\n')
         for index, line in enumerate(lines[1:-1]):
             if copy_mode:
-                rmdir(line.strip())
+                remove(line.strip())
             else:
                 current, original = line.strip().split('|')
                 path = original[::-1]
