@@ -5,7 +5,7 @@ from time import time_ns, ctime
 
 from config import *
 
-log_file = open('log_file.txt', 'w')
+log_file = open('log_file.txt', 'w', encoding='utf-8')
 log_file.write('<<<<<' + str(time_ns()) + '  ===  ' + ctime() + '\n')
 
 

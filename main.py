@@ -4,12 +4,15 @@ if __name__ == '__main__':
     print('Checking the destination directory')
     cF.prep_dst_dir()
     print('The destination directory is alright')
+
     print('Collecting files\' paths')
     filesPath = cF.get_files_iter()
     print('Files\' paths collected')
+
     print('Checking if there is enough storage')
     totalStorage = cF.enough_storage(filesPath)
     print('Enough storage is present')
+
     doneStorage = 0
     lastPrint = cF.time_ns()
     print('Process started')
@@ -29,8 +32,8 @@ if __name__ == '__main__':
         except BaseException as error:
             print(filePath)
             cF.log_file.close()
-            print(error)
-            exit(-1)
+            raise
+    cF.progress_bar(100)
     print('Process Completed Successfully')
     cF.log_file.write(str(cF.time_ns()) + '  ||  ' + cF.ctime() + '>>>>>' + '\n')
     cF.log_file.close()
