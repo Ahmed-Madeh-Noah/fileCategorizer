@@ -23,8 +23,8 @@ if __name__ == '__main__':
             fileName, fileType = cF.extract_file_attr(filePath)
             typePath = cF.prep_type_dir(fileType)
             newDist = cF.generate_path_name(filePath, typePath, fileName, fileType, index)
-            cF.paste_file(filePath, newDist)
             doneStorage += cF.os.path.getsize(filePath)
+            cF.paste_file(filePath, newDist)
             currentTime = cF.time_ns()
             if currentTime - lastPrint >= cF.UPDATING_DURATION or index == lastFileIndex:
                 lastPrint = currentTime
