@@ -6,7 +6,7 @@ from time import time_ns, ctime
 from config import *
 
 log_file = open('log_file.txt', 'w', encoding='utf-8')
-log_file.write('<<<<<' + str(time_ns()) + '  ===  ' + ctime() + '\n')
+log_file.write('<<<<< ' + ctime() + '|' + str(time_ns()) + '|COPY_FILES = ' + str(COPY_FILES) + '\n')
 
 
 def prep_dst_dir():
@@ -70,10 +70,10 @@ def paste_file(file_path, new_dist):
         tmp_file.write(org_file.read())
         tmp_file.close()
         org_file.close()
-        log_file.write('|COPIED|' + file_path + '|' + new_dist + '|\n')
+        log_file.write(new_dist + '\n')
     else:
         os.rename(file_path, new_dist)
-        log_file.write('|MOVED|' + file_path + '|' + new_dist + '|\n')
+        log_file.write(new_dist + '|' + file_path + '\n')
 
 
 def progress_bar(completed):
