@@ -6,7 +6,7 @@ from time import time_ns, ctime
 from config import *
 
 log_file = open('log_file.txt', 'w', encoding='utf-8')
-log_file.write('<<<<< ' + ctime() + '|' + str(time_ns()) + '|COPY_FILES = ' + str(COPY_FILES) + '\n')
+log_file.write('<<<<< ' + ctime() + '|' + str(time_ns()) + '|COPY_FILES = ?' + str(COPY_FILES) + '?\n')
 
 
 def prep_dst_dir():
