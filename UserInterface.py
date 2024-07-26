@@ -1,17 +1,10 @@
-import customtkinter as ctk
-
-
-def hello():
-    print("Hello, World!!")
-
+from tkinter import *
 
 if __name__ == '__main__':
-    ctk.set_appearance_mode('dark')
-    ctk.set_default_color_theme('green')
-    app = ctk.CTk()
-    app.geometry('500x500')
-    app.iconbitmap('green_folder.ico')
-    app.title('File Categorizer User Interface')
-    button = ctk.CTkButton(app, command=hello)
-    button.pack(pady=80)
+    app = Tk()
+    app.title('File Categorizer')
+    app.minsize(500, 500)
+    header = Label(app, text='This program was made by Ahmed Noah', bg='yellow', fg='red',
+                   font=('Times New Roman', 12, 'bold'))
+    header.pack()
     app.mainloop()
