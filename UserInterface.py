@@ -2,7 +2,7 @@ from tkinter import *
 
 
 def apply():
-    pathShowLabel.config(text=f' {inputPath.get()} {inputCopy.get()} {renameList.get(renameList.curselection())}')
+    pathShowLabel.config(text=f' {inputPath.get()} {inputCopy.get()} {rename.get()}')
 
 
 if __name__ == '__main__':
@@ -30,10 +30,11 @@ if __name__ == '__main__':
     copyCB = Checkbutton(app, text='Copy the files', font=('Arial', 15), variable=inputCopy)
     copyCB.pack()
 
-    renameList = Listbox(app, font=('Arial', 15))
-    renameList.insert(END, 'Rename files')
-    renameList.insert(END, 'Do not rename files')
-    renameList.pack()
+    rename = BooleanVar()
+    notRenameRB = Radiobutton(text='Do Not Rename', font=('Arial', 15), variable=rename, value=False)
+    notRenameRB.pack()
+    renameRB = Radiobutton(text='Rename', font=('Arial', 15), variable=rename, value=True)
+    renameRB.pack()
 
     enterButton = Button(app, text='Apply', font=('Arial', 15), command=apply)
     enterButton.pack()
