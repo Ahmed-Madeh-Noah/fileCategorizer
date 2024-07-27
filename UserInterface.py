@@ -1,9 +1,10 @@
 from tkinter import *
 
 
-def set_path():
-    x = path.get()
-    pathShowLabel.config(text=x)
+def apply():
+    path = inputPath.get()
+    copy = inputCopy.get()
+    pathShowLabel.config(text=path + str(copy))
 
 
 if __name__ == '__main__':
@@ -18,15 +19,20 @@ if __name__ == '__main__':
     pathLabel = Label(app, text='Enter the path to work on', font=('Arial', 15))
     pathLabel.pack()
 
-    path = StringVar()
+    inputPath = StringVar()
 
-    pathEntry = Entry(app, font=('Arial', 15), bd=3, textvariable=path)
+    pathEntry = Entry(app, font=('Arial', 15), bd=3, textvariable=inputPath)
     pathEntry.pack()
-
-    enterButton = Button(app, text='Enter', font=('Arial', 15), command=set_path)
-    enterButton.pack()
 
     pathShowLabel = Label(app, text='', font=('Arial', 15))
     pathShowLabel.pack()
+
+    inputCopy = BooleanVar()
+
+    copyCB = Checkbutton(app, text='Copy the files', font=('Arial', 15), variable=inputCopy)
+    copyCB.pack()
+
+    enterButton = Button(app, text='Apply', font=('Arial', 15), command=apply)
+    enterButton.pack()
 
     app.mainloop()
