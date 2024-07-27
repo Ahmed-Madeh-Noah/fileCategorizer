@@ -8,3 +8,4 @@ ___
 * In case of copying, it scans first if there is available storage
 * A progress bar always keeps you in touch with the process
 * A log keeper is present to try to undo operations if an error occurred
+* This is also the repo where I learn tkinter and customtkinter so do not mind the ui commits

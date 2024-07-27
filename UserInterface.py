@@ -17,7 +17,7 @@ if __name__ == '__main__':
     pathLabel = Label(app, text='Enter the path to work on', font=('Arial', 15))
     pathLabel.pack()
 
-    inputPath = StringVar()
+    inputPath = StringVar(value='D:')
 
     pathEntry = Entry(app, font=('Arial', 15), bd=3, textvariable=inputPath)
     pathEntry.pack()
@@ -25,12 +25,12 @@ if __name__ == '__main__':
     pathShowLabel = Label(app, text='', font=('Arial', 15))
     pathShowLabel.pack()
 
-    inputCopy = BooleanVar()
+    inputCopy = BooleanVar(value=True)
 
     copyCB = Checkbutton(app, text='Copy the files', font=('Arial', 15), variable=inputCopy)
     copyCB.pack()
 
-    rename = BooleanVar()
+    rename = BooleanVar(value=False)
     notRenameRB = Radiobutton(text='Do Not Rename', font=('Arial', 15), variable=rename, value=False)
     notRenameRB.pack()
     renameRB = Radiobutton(text='Rename', font=('Arial', 15), variable=rename, value=True)
