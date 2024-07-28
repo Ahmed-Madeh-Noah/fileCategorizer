@@ -19,9 +19,10 @@ def get_files_iter():
     files = []
     for file_path in files_iter:
         should_ignore = False
-        for ignored_path in IGNORED_DIRS:
-            if ignored_path in file_path:
-                should_ignore = True
+        if IGNORED_DIRS:
+            for ignored_path in IGNORED_DIRS:
+                if ignored_path in file_path:
+                    should_ignore = True
         if not should_ignore and os.path.isfile(file_path):
             files.append(file_path)
     return files
